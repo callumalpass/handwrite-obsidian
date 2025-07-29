@@ -39,7 +39,7 @@ export class ProcessingModal extends Modal {
         const progressSection = contentEl.createDiv('handwrite-modal__progress-section');
         
         this.statusEl = progressSection.createEl('p', {
-            text: 'Initializing...',
+            text: 'Ready to process. Click "Start Processing" to begin.',
             cls: 'handwrite-modal__status'
         });
 
