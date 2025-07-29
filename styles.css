@@ -1,0 +1,208 @@
+/* Handwrite OCR Plugin Styles - BEM Methodology */
+
+/* Processing Modal */
+.handwrite-modal {
+    min-width: 500px;
+}
+
+.handwrite-modal__header {
+    margin-bottom: 1rem;
+    color: var(--text-normal);
+}
+
+.handwrite-modal__file-count {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.handwrite-modal__progress-section {
+    margin-bottom: 2rem;
+}
+
+.handwrite-modal__status {
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9em;
+}
+
+.handwrite-modal__progress-container {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.handwrite-modal__progress-bar {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    appearance: none;
+}
+
+.handwrite-modal__progress-bar::-webkit-progress-bar {
+    background-color: var(--background-modifier-border);
+    border-radius: 4px;
+}
+
+.handwrite-modal__progress-bar::-webkit-progress-value {
+    background-color: var(--interactive-accent);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.handwrite-modal__results {
+    margin-bottom: 1.5rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.handwrite-modal__results-header {
+    font-size: 1.1em;
+    margin-bottom: 0.5rem;
+    color: var(--text-normal);
+}
+
+.handwrite-modal__results-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.handwrite-modal__result-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.25rem;
+    background-color: var(--background-secondary);
+}
+
+.handwrite-modal__result-icon {
+    margin-right: 0.5rem;
+    font-weight: bold;
+}
+
+.handwrite-modal__result-icon--success {
+    color: var(--text-success);
+}
+
+.handwrite-modal__result-icon--error {
+    color: var(--text-error);
+}
+
+.handwrite-modal__result-text {
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+
+.handwrite-modal__buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.handwrite-modal__button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.handwrite-modal__button--primary {
+    background-color: var(--interactive-accent);
+    color: var(--text-on-accent);
+}
+
+.handwrite-modal__button--primary:hover {
+    background-color: var(--interactive-accent-hover);
+}
+
+.handwrite-modal__button--primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.handwrite-modal__button--secondary {
+    background-color: var(--background-modifier-border);
+    color: var(--text-normal);
+}
+
+.handwrite-modal__button--secondary:hover {
+    background-color: var(--background-modifier-border-hover);
+}
+
+/* Settings Tab - Minimal custom styles */
+.handwrite-settings__textarea {
+    width: 100%;
+    min-height: 400px;
+    font-family: var(--font-monospace);
+}
+
+.handwrite-settings__var-section {
+    margin-top: 8px;
+}
+
+.handwrite-settings__var-list {
+    margin: 4px 0 8px 20px;
+    font-size: 13px;
+}
+
+.handwrite-settings__example-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.handwrite-settings__example-buttons button {
+    font-size: 12px;
+    padding: 4px 8px;
+}
+
+.handwrite-settings__variable-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+}
+
+.handwrite-settings__variable-name {
+    width: 120px;
+}
+
+.handwrite-settings__variable-type {
+    width: 80px;
+}
+
+.handwrite-settings__variable-description {
+    flex: 1;
+}
+
+
+/* Context Menu */
+.handwrite-context-menu {
+    padding: 0.25rem;
+}
+
+.handwrite-context-menu__item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.15s;
+}
+
+.handwrite-context-menu__item:hover {
+    background-color: var(--background-modifier-hover);
+}
+
+.handwrite-context-menu__icon {
+    margin-right: 0.5rem;
+    color: var(--text-muted);
+}
+
+.handwrite-context-menu__text {
+    color: var(--text-normal);
+}
