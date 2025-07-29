@@ -5,10 +5,10 @@ An Obsidian plugin that converts handwritten notes from images and PDFs into org
 ## Features
 
 - **PDF & Image OCR**: Process PDF files and images (PNG, JPG, JPEG, WEBP, GIF) containing handwritten notes
-- **Gemini AI Integration**: Uses Google's advanced Gemini models for accurate handwriting recognition
+- **Gemini AI Integration**: Uses Google's Gemini models for handwriting recognition
 - **Batch Processing**: Process multiple files simultaneously with progress tracking
 - **Custom Templates**: Fully customizable output templates for generated notes
-- **Variable Extraction**: Extract custom variables like dates, authors, topics from your handwritten notes
+- **Extractable Variables**: Define custom variables that Gemini will identify and extract from your handwritten notes. For example, you can instruct it to look for a date in the top right corner, extract meeting attendees, or identify the course name. These extracted values can then be used in your filename templates (e.g., `{{date}}_{{course}}_notes.md`) and note templates
 - **Smart Organization**: Automatically organize processed notes into designated folders
 
 ## Setup
@@ -45,8 +45,8 @@ Right-click on any supported file or folder and select "Process with Handwrite O
 
 - **Gemini Model**: Choose between different Gemini models:
   - Gemini 2.0 Flash (Recommended - Fast)
-  - Gemini 2.5 Flash (Latest - Thinking capabilities)
-  - Gemini 2.5 Pro (Most Advanced)
+  - Gemini 2.5 Flash (Latest - Includes thinking capabilities)
+  - Gemini 2.5 Pro (Highest quality)
   - Legacy models (1.5 Flash/Pro)
 - **OCR Prompt**: Customize the prompt sent to Gemini for text extraction
 - **Extractable Variables**: Define custom variables to extract from notes
