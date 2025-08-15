@@ -1,0 +1,11 @@
+{
+	"id": "handwrite-ocr",
+	"name": "Handwrite OCR",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Convert handwritten notes from images and PDFs into organized Markdown documents using Google's Gemini AI.",
+	"author": "Callum Alpass",
+	"authorUrl": "https://github.com/callumalpass",
+	"fundingUrl": "",
+	"isDesktopOnly": true
+}
