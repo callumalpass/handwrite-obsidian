@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-handwrite-ocr",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "Convert handwritten notes from images and PDFs into Markdown using Gemini AI",
 	"main": "main.js",
 	"scripts": {
