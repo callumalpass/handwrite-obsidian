@@ -76,7 +76,7 @@ export default class HandwritePlugin extends Plugin {
         this.registerEvent(
             this.app.workspace.on('file-menu', (menu: Menu, file: TFolder) => {
                 if (file instanceof TFolder) {
-                    const supportedFiles = FileProcessor.getSupportedFiles(file);
+                    const supportedFiles = FileProcessor.getSupportedFiles(file, this.app.vault);
                     if (supportedFiles.length > 0) {
                         menu.addItem((item: MenuItem) => {
                             item
@@ -143,6 +143,7 @@ export default class HandwritePlugin extends Plugin {
 
 // File Selector Modal
 import { Modal, Setting } from 'obsidian';
+import { FolderSuggestModal } from './src/ui/FolderSuggestModal';
 
 class FileSelectorModal extends Modal {
     private onSelect: (files: TFile[]) => void;
@@ -165,11 +166,21 @@ class FileSelectorModal extends Modal {
             .setName('Folder')
             .setDesc('Select a folder to process all supported files within it')
             .addText(text => text
-                .setPlaceholder('path/to/folder')
+                .setPlaceholder('Click Browse to select folder')
                 .setValue(this.folderPath)
-                .onChange(value => {
-                    this.folderPath = value;
-                    this.updateFileList();
+                .setDisabled(true))
+            .addButton(button => button
+                .setButtonText('Browse')
+                .onClick(() => {
+                    new FolderSuggestModal(this.app, (folder) => {
+                        this.folderPath = folder.path;
+                        this.updateFileList();
+                        // Update the disabled text input to show selected folder
+                        const textInput = contentEl.querySelector('input[type="text"]') as HTMLInputElement;
+                        if (textInput) {
+                            textInput.value = folder.path;
+                        }
+                    }).open();
                 }));
 
         const fileListContainer = contentEl.createDiv('handwrite-modal__file-list');
@@ -205,7 +216,7 @@ class FileSelectorModal extends Modal {
             return;
         }
 
-        const files = FileProcessor.getSupportedFiles(folder);
+        const files = FileProcessor.getSupportedFiles(folder, this.app.vault);
         if (files.length === 0) {
             container.createEl('p', { 
                 text: 'No supported files found in this folder',

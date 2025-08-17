@@ -49,12 +49,27 @@ export class TemplateRenderer {
         }
 
         // Handle array values (like tags)
-        if (data.tags && data.tags.length > 0) {
+        // Check both data.tags and customVariables.tags for backward compatibility
+        const tags = data.tags || data.customVariables.tags;
+        if (tags && Array.isArray(tags) && tags.length > 0) {
             const tagsRegex = /\{\{\s*\.?tags\s*\}\}/g;
-            const tagsYaml = data.tags.map(tag => `  - ${tag}`).join('\n');
+            const tagsYaml = tags.map(tag => `  - ${tag}`).join('\n');
             result = result.replace(tagsRegex, `\n${tagsYaml}`);
         } else {
             result = result.replace(/tags:\s*\{\{\s*\.?tags\s*\}\}/g, 'tags: []');
+        }
+        
+        // Handle other array values in customVariables for YAML formatting
+        for (const [key, value] of Object.entries(data.customVariables)) {
+            if (Array.isArray(value) && key !== 'tags') { // tags already handled above
+                const arrayRegex = new RegExp(`(\\w+):\\s*\\{\\{\\s*\\.?${key}\\s*\\}\\}`, 'g');
+                if (value.length > 0) {
+                    const yamlArray = value.map(item => `  - ${item}`).join('\n');
+                    result = result.replace(arrayRegex, `$1:\n${yamlArray}`);
+                } else {
+                    result = result.replace(arrayRegex, '$1: []');
+                }
+            }
         }
 
         return result;

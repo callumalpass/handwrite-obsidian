@@ -8,7 +8,6 @@ export interface ExtractableVariable {
 
 export interface StructuredResponse {
     content: string;
-    tags: string[];
     extractedVariables: Record<string, any>;
 }
 
@@ -36,16 +35,21 @@ export class GeminiClient {
         // Always request JSON format
         prompt += '\n\nReturn the response in valid JSON format with the following structure:\n';
         prompt += '{\n';
-        prompt += '  "content": "the transcribed text",\n';
-        prompt += '  "tags": ["array", "of", "tags"],\n';
+        prompt += '  "content": "the transcribed text"';
         
         if (extractableVars.length > 0) {
-            for (const variable of extractableVars) {
-                prompt += `  "${variable.name}": ${variable.type === 'array' ? '[]' : variable.type === 'number' ? '0' : '""'},\n`;
+            prompt += ',\n';
+            for (let i = 0; i < extractableVars.length; i++) {
+                const variable = extractableVars[i];
+                const example = variable.type === 'array' ? '[]' : variable.type === 'number' ? '0' : '""';
+                prompt += `  "${variable.name}": ${example}`;
+                if (i < extractableVars.length - 1) {
+                    prompt += ',\n';
+                }
             }
         }
         
-        prompt += '}';
+        prompt += '\n}';
         
         return prompt;
     }
@@ -113,11 +117,10 @@ export class GeminiClient {
             
             const structuredResponse: StructuredResponse = {
                 content: parsed.content || '',
-                tags: parsed.tags || [],
                 extractedVariables: {}
             };
 
-            // Extract custom variables
+            // Extract all variables
             for (const variable of extractableVars) {
                 if (variable.name in parsed) {
                     structuredResponse.extractedVariables[variable.name] = parsed[variable.name];
@@ -163,11 +166,10 @@ export class GeminiClient {
             
             const structuredResponse: StructuredResponse = {
                 content: parsed.content || '',
-                tags: parsed.tags || [],
                 extractedVariables: {}
             };
 
-            // Extract custom variables
+            // Extract all variables
             for (const variable of extractableVars) {
                 if (variable.name in parsed) {
                     structuredResponse.extractedVariables[variable.name] = parsed[variable.name];

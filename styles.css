@@ -168,15 +168,18 @@
 }
 
 .handwrite-settings__variable-name {
-    width: 120px;
+    min-width: 100px;
+    width: 150px;
 }
 
 .handwrite-settings__variable-type {
-    width: 80px;
+    min-width: 80px;
+    width: 100px;
 }
 
 .handwrite-settings__variable-description {
     flex: 1;
+    min-width: 200px;
 }
 
 

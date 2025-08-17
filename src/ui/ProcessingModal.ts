@@ -15,7 +15,7 @@ export class ProcessingModal extends Modal {
         super(app);
         this.files = files;
         this.settings = settings;
-        this.processor = new FileProcessor(app.vault, app.fileManager, settings);
+        this.processor = new FileProcessor(app, settings);
     }
 
     onOpen() {

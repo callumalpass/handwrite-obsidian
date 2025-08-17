@@ -91,6 +91,25 @@ export class HandwriteSettingTab extends PluginSettingTab {
                 }))
 ;
 
+        // Default Tags Section
+        this.createSection(containerEl, 'Default Tags');
+
+        new Setting(containerEl)
+            .setName('Default Tags')
+            .setDesc('Tags to automatically add to all processed notes (comma-separated)')
+            .addText(text => text
+                .setPlaceholder('handwritten, scanned, ocr')
+                .setValue(this.plugin.settings.defaultTags.join(', '))
+                .onChange(async (value) => {
+                    // Parse comma-separated tags and clean them up
+                    this.plugin.settings.defaultTags = value
+                        .split(',')
+                        .map(tag => tag.trim())
+                        .filter(tag => tag.length > 0);
+                    await this.plugin.saveSettings();
+                }))
+;
+
         // Template Section
         this.createSection(containerEl, 'Template Configuration');
 
@@ -188,6 +207,29 @@ export class HandwriteSettingTab extends PluginSettingTab {
                 }))
 ;
 
+        new Setting(containerEl)
+            .setName('Move Files After Processing')
+            .setDesc('Move source files to a different folder after successful transcription')
+            .addToggle(toggle => toggle
+                .setValue(this.plugin.settings.moveFilesAfterProcessing)
+                .onChange(async (value) => {
+                    this.plugin.settings.moveFilesAfterProcessing = value;
+                    await this.plugin.saveSettings();
+                }))
+;
+
+        new Setting(containerEl)
+            .setName('Processed Files Folder')
+            .setDesc('The folder where processed source files will be moved (only if "Move Files After Processing" is enabled)')
+            .addText(text => text
+                .setPlaceholder('Processed Handwritten Files')
+                .setValue(this.plugin.settings.processedFilesFolder)
+                .onChange(async (value) => {
+                    this.plugin.settings.processedFilesFolder = value;
+                    await this.plugin.saveSettings();
+                }))
+;
+
         // Processing Section
         this.createSection(containerEl, 'Processing Options');
 
@@ -222,6 +264,17 @@ export class HandwriteSettingTab extends PluginSettingTab {
                 .setValue(this.plugin.settings.debugMode)
                 .onChange(async (value) => {
                     this.plugin.settings.debugMode = value;
+                    await this.plugin.saveSettings();
+                }))
+;
+
+        new Setting(containerEl)
+            .setName('Auto-open Created Notes')
+            .setDesc('Automatically open processed notes in a new tab after successful transcription')
+            .addToggle(toggle => toggle
+                .setValue(this.plugin.settings.autoOpenCreatedNotes)
+                .onChange(async (value) => {
+                    this.plugin.settings.autoOpenCreatedNotes = value;
                     await this.plugin.saveSettings();
                 }))
 ;

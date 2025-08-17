@@ -11,20 +11,27 @@ export interface HandwriteSettings {
     concurrentWorkers: number;
     showProgressBar: boolean;
     debugMode: boolean;
+    moveFilesAfterProcessing: boolean;
+    processedFilesFolder: string;
+    defaultTags: string[];
+    autoOpenCreatedNotes: boolean;
 }
 
 export const DEFAULT_SETTINGS: HandwriteSettings = {
     geminiApiKey: '',
     geminiModel: 'gemini-2.0-flash-latest',
-    prompt: `Extract the handwritten text from this image and identify any hashtags.
+    prompt: `Extract the handwritten text from this image.
 - Put the main text content in the "content" field, preserving ALL line breaks and formatting
-- Find any hashtags (words starting with #) and list them in the "tags" array
-- If no hashtags are found, return an empty array for tags
 - Use $ for LaTeX, not \`\`\`latex.
 - Transcribe the text exactly as it appears, including newlines, spacing, and paragraph breaks.
-- IMPORTANT: Preserve all line breaks and whitespace in the content field.
-- Return the response as JSON with "content" and "tags" fields.`,
-    extractableVariables: [],
+- IMPORTANT: Preserve all line breaks and whitespace in the content field.`,
+    extractableVariables: [
+        {
+            name: 'tags',
+            type: 'array',
+            description: 'Find any hashtags (words starting with #) and list them. If no hashtags are found, return an empty array.'
+        }
+    ],
     templateContent: `---
 attachments: 
   - {{markdownLink}}
@@ -40,10 +47,19 @@ dateModified: {{dateProcessed}}
     outputFolder: 'Handwritten Notes',
     concurrentWorkers: 4,
     showProgressBar: true,
-    debugMode: false
+    debugMode: false,
+    moveFilesAfterProcessing: false,
+    processedFilesFolder: 'Processed Handwritten Files',
+    defaultTags: [],
+    autoOpenCreatedNotes: false
 };
 
 export const EXAMPLE_EXTRACTABLE_VARIABLES: ExtractableVariable[] = [
+    {
+        name: 'tags',
+        type: 'array',
+        description: 'Find any hashtags (words starting with #) and list them. If no hashtags are found, return an empty array.'
+    },
     {
         name: 'author',
         type: 'string',
