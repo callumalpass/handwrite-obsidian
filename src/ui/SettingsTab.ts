@@ -34,11 +34,13 @@ export class HandwriteSettingTab extends PluginSettingTab {
             .setName('Gemini Model')
             .setDesc('The Gemini model to use for OCR')
             .addDropdown(dropdown => dropdown
-                .addOption('gemini-2.0-flash-latest', 'Gemini 2.0 Flash (Recommended - Fast)')
-                .addOption('gemini-2.5-flash', 'Gemini 2.5 Flash (Latest - Thinking)')
-                .addOption('gemini-2.5-pro', 'Gemini 2.5 Pro (Most Advanced)')
-                .addOption('gemini-1.5-flash-latest', 'Gemini 1.5 Flash (Legacy)')
-                .addOption('gemini-1.5-pro-latest', 'Gemini 1.5 Pro (Legacy)')
+                .addOption('gemini-3-pro-preview', 'Gemini 3 Pro Preview (Most Advanced)')
+                .addOption('gemini-3-flash-preview', 'Gemini 3 Flash Preview')
+                .addOption('gemini-2.5-flash-preview-05-20', 'Gemini 2.5 Flash (Recommended - Fast)')
+                .addOption('gemini-2.5-pro-preview-06-05', 'Gemini 2.5 Pro')
+                .addOption('gemini-2.0-flash', 'Gemini 2.0 Flash (Legacy)')
+                .addOption('gemini-1.5-flash', 'Gemini 1.5 Flash (Legacy)')
+                .addOption('gemini-1.5-pro', 'Gemini 1.5 Pro (Legacy)')
                 .setValue(this.plugin.settings.geminiModel)
                 .onChange(async (value) => {
                     this.plugin.settings.geminiModel = value;

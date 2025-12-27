@@ -19,7 +19,7 @@ export interface HandwriteSettings {
 
 export const DEFAULT_SETTINGS: HandwriteSettings = {
     geminiApiKey: '',
-    geminiModel: 'gemini-2.0-flash-latest',
+    geminiModel: 'gemini-2.5-flash-preview-05-20',
     prompt: `Extract the handwritten text from this image.
 - Put the main text content in the "content" field, preserving ALL line breaks and formatting
 - Use $ for LaTeX, not \`\`\`latex.

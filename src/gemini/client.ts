@@ -16,7 +16,7 @@ export class GeminiClient {
     private modelName: string;
     private debugMode: boolean;
 
-    constructor(apiKey: string, modelName: string = 'gemini-2.0-flash-latest', debugMode: boolean = false) {
+    constructor(apiKey: string, modelName: string = 'gemini-2.5-flash-preview-05-20', debugMode: boolean = false) {
         this.ai = new GoogleGenAI({ apiKey });
         this.modelName = modelName;
         this.debugMode = debugMode;
